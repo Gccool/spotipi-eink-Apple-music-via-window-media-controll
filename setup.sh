@@ -4,9 +4,12 @@ sudo apt-get install python3-numpy git firefox-esr
 
 echo "Clone repositories:"
 git clone https://github.com/ryanwa18/spotipi-eink
-cd spotipi-eink
-git clone https://github.com/pimoroni/inky
 
+
+cd spotipi-eink
+
+git clone https://github.com/pimoroni/inky
+#continue install from here clone my git repo
 echo "Add font to system:"
 sudo cp ./fonts/CircularStd-Bold.otf /usr/share/fonts/opentype/CircularStd-Bold/CircularStd-Bold.otf
 
