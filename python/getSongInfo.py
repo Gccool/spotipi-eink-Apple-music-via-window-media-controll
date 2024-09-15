@@ -6,6 +6,8 @@ import requests
 from io import BytesIO
 from PIL import Image
 
+#chnage to request info from my pc
+
 def getSongInfo(username, token_path):
   scope = 'user-read-currently-playing'
   token = util.prompt_for_user_token(username, scope, cache_path=token_path)
