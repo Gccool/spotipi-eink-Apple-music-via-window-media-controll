@@ -16,8 +16,8 @@ url = f"http://{machine_ip}:5000/main"
 
 #response = requests.get(url)
 
-client_id = '88fedb232e9a472b85693ccc983826de'
-client_secret = '5a0bc8dd1bf946db9c17fc51c6a9a896'
+client_id = 'Client Id'
+client_secret = 'Client Secret'
 
 
 def get_access_token():
