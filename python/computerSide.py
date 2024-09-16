@@ -19,7 +19,7 @@ import cv2
 
 import requests
 from flask import Flask, jsonify, request
-import sessions
+
 
 app = Flask(__name__)
 
