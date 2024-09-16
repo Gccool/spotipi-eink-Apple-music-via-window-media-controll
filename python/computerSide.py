@@ -94,8 +94,9 @@ async def skip():
 
     if current_session:
         if current_session.source_app_user_model_id == "AppleInc.AppleMusicWin_nzyj5cx40ttqa!App":
-            #if current_session.IsNextEnabled == True:
-            current_session.                
+            if await current_session.TrySkipNextAsync() == False:
+                print("failed to skip")
+                        
                                
             
 if __name__ == "__main__":
