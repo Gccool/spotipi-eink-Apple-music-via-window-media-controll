@@ -17,6 +17,7 @@ import winsdk.windows.media.control as wmc
 
 import cv2
 
+import requests
 
 client_id = '88fedb232e9a472b85693ccc983826de'
 client_secret = '5a0bc8dd1bf946db9c17fc51c6a9a896'

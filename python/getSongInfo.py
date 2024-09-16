@@ -1,12 +1,15 @@
 import logging
-import spotipy
-import spotipy.util as util
+#import spotipy
+#import spotipy.util as util
 
 import requests
 from io import BytesIO
 from PIL import Image
 
 #chnage to request info from my pc
+
+
+
 
 def getSongInfo(username, token_path):
   scope = 'user-read-currently-playing'
@@ -26,3 +29,6 @@ def getSongInfo(username, token_path):
       print("Can't get token for", username)
       return None
   
+
+
+#return [song, imageURL, artist]
