@@ -18,9 +18,10 @@ import winsdk.windows.media.control as wmc
 import cv2
 
 import requests
+from flask import Flask, jsonify, request
+import sessions
 
-
-
+app = Flask(__name__)
 
 
 async def get_media_info():
@@ -52,16 +53,17 @@ async def get_media_info():
 
 
 
-
+@app.route('/main', methods=['GET'])
 def main():
     #requests.
     current_media_info = get_media_info()
     if current_media_info != None:
         Title = current_media_info['title']
         Album_Artist =  current_media_info['album_artist']
-        return Title, Album_Artist
+        return jsonify(Title, Album_Artist)
     
             
             
             
-main()
+if __name__ == "__main__":
+    app.run(host='0.0.0.0', port=5000)
