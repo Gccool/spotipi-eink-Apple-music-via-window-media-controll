@@ -38,7 +38,7 @@ async def get_media_info():
 
     
 
-    breakpoint()
+    #breakpoint()
 
     if current_session:
         if current_session.source_app_user_model_id == "AppleInc.AppleMusicWin_nzyj5cx40ttqa!App":
