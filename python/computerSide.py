@@ -29,22 +29,31 @@ async def get_media_info():
     sessions = await mediaManager.request_async()
     
     
-    current_session = sessions.get_current_session()
+    current_session = sessions.get_sessions()
+
+    for ses in current_session:
+        if ses.source_app_user_model_id == "AppleInc.AppleMusicWin_nzyj5cx40ttqa!App":
+            current_session = ses
+            break
+
+    
+
+    breakpoint()
 
     if current_session:
-        
         if current_session.source_app_user_model_id == "AppleInc.AppleMusicWin_nzyj5cx40ttqa!App":
+            if await current_session.try_get_media_properties_async() is not None:
 
-            info = await current_session.try_get_media_properties_async()
+                info = await current_session.try_get_media_properties_async()
 
-            info_dict = {song_attr: info.__getattribute__(song_attr) for song_attr in dir(info) if song_attr[0] != '_'}
+                info_dict = {song_attr: info.__getattribute__(song_attr) for song_attr in dir(info) if song_attr[0] != '_'}
 
-            info_dict['genres'] = list(info_dict['genres'])
+                info_dict['genres'] = list(info_dict['genres'])
 
-            breakpoint()
+                #breakpoint()
 
-            return info_dict
-    return None
+                return info_dict
+    
     
     
 
@@ -58,11 +67,13 @@ async def get_media_info():
 async def main():
     #requests.
     current_media_info = await get_media_info()
+    #breakpoint()
     if current_media_info is not None:
         Title = current_media_info['title']
         Album_Artist =  current_media_info['album_artist']
         return jsonify({'title': Title, 'album_artist': Album_Artist})
-    
+    else:
+        return jsonify({'error': 'No media information available'}), 404
             
             
             

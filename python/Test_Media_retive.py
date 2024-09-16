@@ -29,17 +29,24 @@ previousSong = ''
 async def get_media_info():
     sessions = await mediaManager.request_async()
 
-    current_session = sessions.get_current_session()
+    current_session = sessions.get_sessions()
+
+    for ses in current_session:
+        if ses.source_app_user_model_id == "AppleInc.AppleMusicWin_nzyj5cx40ttqa!App":
+            current_session = ses
+            break
+
+    #breakpoint()
     if current_session:
-        
+        if await current_session.try_get_media_properties_async() is not None:
 
-        info = await current_session.try_get_media_properties_async()
+            info = await current_session.try_get_media_properties_async()
 
-        info_dict = {song_attr: info.__getattribute__(song_attr) for song_attr in dir(info) if song_attr[0] != '_'}
+            info_dict = {song_attr: info.__getattribute__(song_attr) for song_attr in dir(info) if song_attr[0] != '_'}
 
-        info_dict['genres'] = list(info_dict['genres'])
+            info_dict['genres'] = list(info_dict['genres'])
 
-        return info_dict
+            return info_dict
     
     
 

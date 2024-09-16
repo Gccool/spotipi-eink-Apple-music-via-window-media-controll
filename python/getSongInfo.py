@@ -49,6 +49,7 @@ async def getSongInfo():
   #breakpoint()
     async with aiohttp.ClientSession() as session:
         async with session.get('http://192.168.0.70:5000/main') as response:
+            #breakpoint()
             if response.status_code == 200:
               media_info = response.json()
               print("Media Info:", media_info)
@@ -58,3 +59,5 @@ async def getSongInfo():
 
 asyncio.run(getSongInfo())
 #return [song, imageURL, artist]
+
+#network aint requesting right
