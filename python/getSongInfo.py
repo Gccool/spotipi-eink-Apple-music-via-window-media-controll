@@ -84,7 +84,7 @@ async def getSongInfo():
                 print(response.status)
                 
 #Add suport for the buttons to pause, skip, rewind (and possibly rotary                
-#encoder to controll apple music volume)                
+#encoder to controll apple music volume https://stackoverflow.com/questions/20828752/python-change-master-application-volume)                
 
 #print(asyncio.run(getSongInfo()))
 #return [song, imageURL, artist]
