@@ -19,9 +19,10 @@ import cv2
 
 import requests
 from flask import Flask, jsonify, request
+from quart import Quart, jsonify
 
 
-app = Flask(__name__)
+app = Quart(__name__)
 
 
 async def get_media_info():
@@ -29,7 +30,6 @@ async def get_media_info():
     
     
     current_session = sessions.get_current_session()
-    current_session.source_app_user_model_id
 
     if current_session:
         
@@ -44,6 +44,7 @@ async def get_media_info():
             breakpoint()
 
             return info_dict
+    return None
     
     
 
@@ -54,14 +55,15 @@ async def get_media_info():
 
 
 @app.route('/main', methods=['GET'])
-def main():
+async def main():
     #requests.
-    current_media_info = get_media_info()
-    if current_media_info != None:
+    current_media_info = await get_media_info()
+    if current_media_info is not None:
         Title = current_media_info['title']
         Album_Artist =  current_media_info['album_artist']
-        return jsonify(Title, Album_Artist)
+        return jsonify({'title': Title, 'album_artist': Album_Artist})
     
+            
             
             
             
