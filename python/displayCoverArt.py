@@ -39,11 +39,11 @@ if len(sys.argv) > 2:
     try:
       while True:
         try:
-          imageURL = getSongInfo(username, token_path)[1]
+          imageURL = getSongInfo()[1]
           album_cover_path = os.path.join(dir, 'client/album_cover.png')
           urllib.request.urlretrieve(imageURL, album_cover_path)
-          songName = getSongInfo(username, token_path)[0]
-          artistName = getSongInfo(username, token_path)[2]
+          songName = getSongInfo()[0]
+          artistName = getSongInfo()[2]
           currentSong = imageURL
 
           if ( prevSong != currentSong ):
