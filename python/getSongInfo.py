@@ -1,4 +1,4 @@
-import logging
+#import logging
 #import spotipy
 #import spotipy.util as util
 
@@ -50,11 +50,11 @@ async def getSongInfo():
     async with aiohttp.ClientSession() as session:
         async with session.get('http://192.168.0.70:5000/main') as response:
             #breakpoint()
-            if response.status_code == 200:
+            if response.status == 200:
               media_info = response.json()
               print("Media Info:", media_info)
             else:
-                print(response.status_code)
+                print(response.status)
 
 
 asyncio.run(getSongInfo())

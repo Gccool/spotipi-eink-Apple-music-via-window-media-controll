@@ -38,7 +38,7 @@ async def get_media_info():
 
     
 
-    breakpoint()
+    #breakpoint()
 
     if current_session:
         if current_session.source_app_user_model_id == "AppleInc.AppleMusicWin_nzyj5cx40ttqa!App":
@@ -79,4 +79,4 @@ async def main():
             
             
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', port=5000, debug=True)
