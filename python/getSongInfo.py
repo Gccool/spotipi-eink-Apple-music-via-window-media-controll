@@ -83,7 +83,7 @@ async def getSongInfo():
             else:
                 print(response.status)
                 
-#Add suport for the buttons to pause, skip, rewind (and possibly rotary                
+#Add suport for the buttons to pause, skip, rewind - https://forums.pimoroni.com/t/inky-impression-7-3-buttons-demo/24457/2 (and possibly rotary                
 #encoder to controll apple music volume https://stackoverflow.com/questions/20828752/python-change-master-application-volume)                
 
 #print(asyncio.run(getSongInfo()))
