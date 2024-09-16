@@ -32,11 +32,11 @@ def get_access_token():
 
 
 
-def get_thumbnail(access_token, track_name, artist_name):
+def get_thumbnail(access_token, track_name, artist_name, album_name):
     headers = {
         "Authorization": f"Bearer {access_token}"
     }
-    query = f"track:{track_name} artist:{artist_name}"
+    query = f"track:{track_name} artist:{artist_name} album:{album_name}"
     response = requests.get(f"https://api.spotify.com/v1/search?q={query}&type=track", headers=headers)
     tracks = response.json()['tracks']['items']
     if tracks:
@@ -76,7 +76,7 @@ async def getSongInfo():
                     print('album_artist split error')
 
 
-                thumb_url = get_thumbnail(token, title, artist)
+                thumb_url = get_thumbnail(token, title, artist, album)
 
                 return [title, thumb_url, artist]
 
