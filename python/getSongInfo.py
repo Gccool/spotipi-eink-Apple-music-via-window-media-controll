@@ -84,7 +84,7 @@ async def getSongInfo():
                 print(response.status)
 
 
-asyncio.run(getSongInfo())
+#print(asyncio.run(getSongInfo()))
 #return [song, imageURL, artist]
 
 #network aint requesting right
