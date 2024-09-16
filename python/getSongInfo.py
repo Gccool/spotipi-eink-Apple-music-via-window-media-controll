@@ -8,12 +8,28 @@ from PIL import Image
 import requests
 import aiohttp
 import asyncio
+import base64
 #chnage to request info from my pc
 
 machine_ip = "192.168.0.70"
 url = f"http://{machine_ip}:5000/main"
 
 #response = requests.get(url)
+
+client_id = '88fedb232e9a472b85693ccc983826de'
+client_secret = '5a0bc8dd1bf946db9c17fc51c6a9a896'
+
+
+def get_access_token():
+    auth_str = f"{client_id}:{client_secret}"
+    b64_auth_str = base64.b64encode(auth_str.encode()).decode()
+    headers = {
+        "Authorization": f"Basic {b64_auth_str}",
+        "Content-Type": "application/x-www-form-urlencoded"
+    }
+    response = requests.post('https://accounts.spotify.com/api/token', headers=headers, data={"grant_type": "client_credentials"})
+    return response.json()['access_token']
+
 
 
 def get_thumbnail(access_token, track_name, artist_name):
@@ -51,8 +67,19 @@ async def getSongInfo():
         async with session.get('http://192.168.0.70:5000/main') as response:
             #breakpoint()
             if response.status == 200:
-              media_info = response.json()
-              print("Media Info:", media_info)
+                media_info = await response.json()
+                token = get_access_token()
+                title = media_info['title']
+                if split_album_artist_check:
+                    artist, album = split_album_artist(media_info['album_artist'])
+                else:
+                    print('album_artist split error')
+
+
+                thumb_url = get_thumbnail(token, title, artist)
+
+                return [title, thumb_url, artist]
+
             else:
                 print(response.status)
 
