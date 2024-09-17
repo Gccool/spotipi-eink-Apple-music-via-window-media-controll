@@ -20,7 +20,7 @@ import cv2
 import requests
 from flask import Flask, jsonify, request
 from quart import Quart, jsonify
-
+from pycaw.pycaw import AudioUtilities, ISimpleAudioVolume
 
 app = Quart(__name__)
 
@@ -144,6 +144,21 @@ async def play_pause():
                 return jsonify({"status": "failed", "message": "could not pause or play"}), 500
     
     return jsonify({"status": "success"}), 200
+
+
+@app.route('/changevolume')  
+def changevolume(volumeChange, IsUp):
+    sessions = AudioUtilities.GetAllSessions()
+    for session in sessions:
+        volume = session._ctl.QueryInterface(ISimpleAudioVolume)
+        if session.Process and session.Process.name() == "AppleMusic.exe":
+            CurrentVolume = volume.GetMasterVolume()
+            if IsUp:
+                NewVolume = CurrentVolume + volumeChange
+                volume.SetMasterVolume(NewVolume, None)
+            else:
+                NewVolume = CurrentVolume - volumeChange
+                volumeChange.SetMasterVolume(NewVolume, None)
                                
             
 if __name__ == "__main__":

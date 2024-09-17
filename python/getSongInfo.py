@@ -9,6 +9,8 @@ import requests
 import aiohttp
 import asyncio
 import base64
+from time import sleep
+import random
 #chnage to request info from my pc
 
 machine_ip = "192.168.0.70"
@@ -148,6 +150,18 @@ async def Pause_PlaySong():
 #asyncio.run(SkipSong())
 #asyncio.run(RewindSong())
 #asyncio.run(Pause_PlaySong())
+
+
+#stupid code to randomly stop play skip or rewind your songs
+while True:
+    sleep(random.randint(0, 20))
+    i = random.randint(0,2)
+    if i == 0:
+        asyncio.run(SkipSong())
+    elif i == 1:
+        asyncio.run(RewindSong())
+    else:
+        asyncio.run(Pause_PlaySong())
 
 #Add suport for the buttons to pause, skip, rewind - https://forums.pimoroni.com/t/inky-impression-7-3-buttons-demo/24457/2 (and possibly rotary                
 #encoder to controll apple music volume https://stackoverflow.com/questions/20828752/python-change-master-application-volume)                
