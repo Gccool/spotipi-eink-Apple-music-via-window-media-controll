@@ -16,8 +16,8 @@ url = f"http://{machine_ip}:5000/main"
 
 #response = requests.get(url)
 
-client_id = '30debe6a4b77491fa3ece9ca4a611d3a'
-client_secret = 'e0636fdd503545b6bc1536d0e730d363'
+client_id = ''
+client_secret = ''
 
 
 def get_access_token():
@@ -37,6 +37,18 @@ def get_thumbnail(access_token, track_name, artist_name):
         "Authorization": f"Bearer {access_token}"
     }
     query = f"track:{track_name} artist:{artist_name}"
+    response = requests.get(f"https://api.spotify.com/v1/search?q={query}&type=track", headers=headers)
+    tracks = response.json()['tracks']['items']
+    if tracks:
+        return tracks[0]['album']['images'][0]['url']
+    
+    query = f"track:{track_name}"
+    response = requests.get(f"https://api.spotify.com/v1/search?q={query}&type=track", headers=headers)
+    tracks = response.json()['tracks']['items']
+    if tracks:
+        return tracks[0]['album']['images'][0]['url']
+    
+    query = f"artist:{artist_name}"
     response = requests.get(f"https://api.spotify.com/v1/search?q={query}&type=track", headers=headers)
     tracks = response.json()['tracks']['items']
     if tracks:
