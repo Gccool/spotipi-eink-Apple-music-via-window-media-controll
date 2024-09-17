@@ -149,8 +149,15 @@ async def play_pause():
 @app.route('/changevolume')  
 def changevolume():
 
-    volumeChange = int(request.args.get('volumeChange'))
-    IsUp = request.args.get('isUp').lower() == 'true'
+    volumeChange = request.args.get('volumeChange', default='0.0')
+    IsUp = request.args.get('isUp', default='false')
+
+    try:
+        volume_change = float(volume_change)
+    except ValueError:
+        return jsonify({"error": "Invalid volumeChange value"}), 400
+    
+    is_up = is_up.lower() == 'true'
 
     sessions = AudioUtilities.GetAllSessions()
     for session in sessions:
