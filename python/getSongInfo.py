@@ -147,6 +147,19 @@ async def Pause_PlaySong():
             if response.status == 200:
                 info = await response.json()
 
+
+async def ChangeVolume(volumeChange: float, isUp: bool):
+  #breakpoint()
+    params = {
+        'volumeChange': volumeChange,
+        'isUp': isUp
+    }
+    async with aiohttp.ClientSession() as session:
+        async with session.get('http://192.168.0.70:5000/changevolume', params=params) as response:
+            #breakpoint()
+            if response.status == 200:
+                info = await response.json()
+
 #asyncio.run(SkipSong())
 #asyncio.run(RewindSong())
 #asyncio.run(Pause_PlaySong())
@@ -162,6 +175,7 @@ while True:
         asyncio.run(RewindSong())
     else:
         asyncio.run(Pause_PlaySong())
+    
 
 #Add suport for the buttons to pause, skip, rewind - https://forums.pimoroni.com/t/inky-impression-7-3-buttons-demo/24457/2 (and possibly rotary                
 #encoder to controll apple music volume https://stackoverflow.com/questions/20828752/python-change-master-application-volume)                

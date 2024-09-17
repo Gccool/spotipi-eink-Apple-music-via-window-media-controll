@@ -147,7 +147,11 @@ async def play_pause():
 
 
 @app.route('/changevolume')  
-def changevolume(volumeChange, IsUp):
+def changevolume():
+
+    volumeChange = int(request.args.get('volumeChange'))
+    IsUp = request.args.get('isUp').lower() == 'true'
+
     sessions = AudioUtilities.GetAllSessions()
     for session in sessions:
         volume = session._ctl.QueryInterface(ISimpleAudioVolume)
