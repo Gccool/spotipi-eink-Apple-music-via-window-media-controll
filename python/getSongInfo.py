@@ -82,7 +82,23 @@ async def getSongInfo():
 
             else:
                 print(response.status)
-                
+
+
+
+async def SkipSong():
+  #breakpoint()
+    async with aiohttp.ClientSession() as session:
+        async with session.get('http://192.168.0.70:5000/skip') as response:
+            #breakpoint()
+            if response.status == 200:
+                info = await response.json()
+
+            #else:
+                #print(response.status)
+
+#asyncio.run(SkipSong())
+
+
 #Add suport for the buttons to pause, skip, rewind - https://forums.pimoroni.com/t/inky-impression-7-3-buttons-demo/24457/2 (and possibly rotary                
 #encoder to controll apple music volume https://stackoverflow.com/questions/20828752/python-change-master-application-volume)                
 
