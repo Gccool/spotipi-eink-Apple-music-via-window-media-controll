@@ -145,32 +145,10 @@ async def play_pause():
     
     return jsonify({"status": "success"}), 200
 
+          
 
-@app.route('/changevolume')  
-def changevolume():
 
-    volumeChange = request.args.get('volumeChange', default='0.0')
-    IsUp = request.args.get('isUp', default='false')
 
-    try:
-        volume_change = float(volume_change)
-    except ValueError:
-        return jsonify({"error": "Invalid volumeChange value"}), 400
-    
-    is_up = is_up.lower() == 'true'
-
-    sessions = AudioUtilities.GetAllSessions()
-    for session in sessions:
-        volume = session._ctl.QueryInterface(ISimpleAudioVolume)
-        if session.Process and session.Process.name() == "AppleMusic.exe":
-            CurrentVolume = volume.GetMasterVolume()
-            if IsUp:
-                NewVolume = CurrentVolume + volumeChange
-                volume.SetMasterVolume(NewVolume, None)
-            else:
-                NewVolume = CurrentVolume - volumeChange
-                volumeChange.SetMasterVolume(NewVolume, None)
-                               
             
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000, debug=True)
