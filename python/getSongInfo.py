@@ -107,7 +107,7 @@ async def getSongInfo():
                     print('album_artist split error')
 
 
-                thumb_url = get_thumbnail(token, title, artist)
+                thumb_url = get_thumbnail(token, title, artist, album)
 
                 return [title, thumb_url, artist]
 
