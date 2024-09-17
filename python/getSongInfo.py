@@ -156,15 +156,15 @@ async def Pause_PlaySong():
 
 
 #stupid code to randomly stop play skip or rewind your songs
-while True:
-    sleep(random.randint(0, 20))
-    i = random.randint(0,2)
-    if i == 0:
-        asyncio.run(SkipSong())
-    elif i == 1:
-        asyncio.run(RewindSong())
-    else:
-        asyncio.run(Pause_PlaySong())
+#while True:
+#    sleep(random.randint(0, 20))
+#    i = random.randint(0,2)
+#    if i == 0:
+#        asyncio.run(SkipSong())
+#    elif i == 1:
+#        asyncio.run(RewindSong())
+#    else:
+#        asyncio.run(Pause_PlaySong())
     
 
 #Add suport for the buttons to pause, skip, rewind - https://forums.pimoroni.com/t/inky-impression-7-3-buttons-demo/24457/2 (and possibly rotary                
