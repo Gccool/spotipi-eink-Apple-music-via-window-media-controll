@@ -97,6 +97,53 @@ async def skip():
             if await current_session.try_skip_next_async() == False:
                 print("failed to skip")
                         
+
+@app.route('/rewind')            
+async def rewind():
+	
+    sessions = await mediaManager.request_async()
+    
+    
+    current_session = sessions.get_sessions()
+
+    for ses in current_session:
+        if ses.source_app_user_model_id == "AppleInc.AppleMusicWin_nzyj5cx40ttqa!App":
+            current_session = ses
+            break
+
+    
+
+    #breakpoint()
+
+    if current_session:
+        if current_session.source_app_user_model_id == "AppleInc.AppleMusicWin_nzyj5cx40ttqa!App":
+            if await current_session.try_skip_previous_async() == False:
+                print("failed to skip")
+
+@app.route('/play_pause')            
+async def play_pause():
+	
+    sessions = await mediaManager.request_async()
+    
+    
+    current_session = sessions.get_sessions()
+
+    for ses in current_session:
+        if ses.source_app_user_model_id == "AppleInc.AppleMusicWin_nzyj5cx40ttqa!App":
+            current_session = ses
+            break
+
+    
+
+    #breakpoint()
+
+    if current_session:
+        if current_session.source_app_user_model_id == "AppleInc.AppleMusicWin_nzyj5cx40ttqa!App":
+            #breakpoint()
+            if await current_session.try_toggle_play_pause_async() == False:
+                return jsonify({"status": "failed", "message": "could not pause or play"}), 500
+    
+    return jsonify({"status": "success"}), 200
                                
             
 if __name__ == "__main__":

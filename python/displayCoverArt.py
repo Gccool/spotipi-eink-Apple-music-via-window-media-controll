@@ -11,6 +11,7 @@ import configparser
 from bs4 import BeautifulSoup
 import urllib.request
 import subprocess
+import asyncio
 
 if len(sys.argv) > 2:
     username = sys.argv[1]
@@ -39,12 +40,13 @@ if len(sys.argv) > 2:
     try:
       while True:
         try:
-          imageURL = getSongInfo()[1]
+          songName, imageURL, artistName = asyncio.run(getSongInfo())
+          #imageURL = getSongInfo()[1]
           album_cover_path = os.path.join(dir, 'client/album_cover.png')
           urllib.request.urlretrieve(imageURL, album_cover_path)
-          songName = getSongInfo()[0]
-          artistName = getSongInfo()[2]
-          currentSong = imageURL
+          #songName = getSongInfo()[0]
+          #artistName = getSongInfo()[2]
+          currentSong = songName+artistName
 
           if ( prevSong != currentSong ):
             response = requests.get(imageURL)

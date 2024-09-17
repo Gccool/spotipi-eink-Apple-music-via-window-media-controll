@@ -16,8 +16,8 @@ url = f"http://{machine_ip}:5000/main"
 
 #response = requests.get(url)
 
-client_id = 'Client Id'
-client_secret = 'Client Secret'
+client_id = ''
+client_secret = ''
 
 
 def get_access_token():
@@ -32,11 +32,11 @@ def get_access_token():
 
 
 
-def get_thumbnail(access_token, track_name, artist_name, album_name):
+def get_thumbnail(access_token, track_name, artist_name):
     headers = {
         "Authorization": f"Bearer {access_token}"
     }
-    query = f"track:{track_name} artist:{artist_name} album:{album_name}"
+    query = f"track:{track_name} artist:{artist_name}"
     response = requests.get(f"https://api.spotify.com/v1/search?q={query}&type=track", headers=headers)
     tracks = response.json()['tracks']['items']
     if tracks:
@@ -76,7 +76,7 @@ async def getSongInfo():
                     print('album_artist split error')
 
 
-                thumb_url = get_thumbnail(token, title, artist, album)
+                thumb_url = get_thumbnail(token, title, artist)
 
                 return [title, thumb_url, artist]
 
@@ -96,13 +96,30 @@ async def SkipSong():
             #else:
                 #print(response.status)
 
-#asyncio.run(SkipSong())
 
+async def RewindSong():
+  #breakpoint()
+    async with aiohttp.ClientSession() as session:
+        async with session.get('http://192.168.0.70:5000/rewind') as response:
+            #breakpoint()
+            if response.status == 200:
+                info = await response.json()
+
+
+async def Pause_PlaySong():
+  #breakpoint()
+    async with aiohttp.ClientSession() as session:
+        async with session.get('http://192.168.0.70:5000/play_pause') as response:
+            #breakpoint()
+            if response.status == 200:
+                info = await response.json()
+
+#asyncio.run(SkipSong())
+#asyncio.run(RewindSong())
+#asyncio.run(Pause_PlaySong())
 
 #Add suport for the buttons to pause, skip, rewind - https://forums.pimoroni.com/t/inky-impression-7-3-buttons-demo/24457/2 (and possibly rotary                
 #encoder to controll apple music volume https://stackoverflow.com/questions/20828752/python-change-master-application-volume)                
-
-#print(asyncio.run(getSongInfo()))
 #return [song, imageURL, artist]
 
 #network aint requesting right
