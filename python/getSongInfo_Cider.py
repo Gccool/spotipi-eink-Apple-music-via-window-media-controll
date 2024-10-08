@@ -20,15 +20,14 @@ url = f"http://{machine_ip}:10767/api/v1/playback"
 
 #response = requests.get(url)
 
-client_id = ''
-client_secret = ''
+
 
 
 
 def is_cider_active():
     try:
         response = requests.get(url + "/active")
-        if response.status_code == 204:
+        if response.status_code == 200:
             #print("Cider is active.")
             return True
         else:
@@ -60,7 +59,6 @@ def isSongOn(info):
         return False
 
 
-print(get_current_playing_song())
 
 def split_album_artist(album_artist):
     # Split the string at ' - '
@@ -98,17 +96,27 @@ def getSongInfo():
 
 def SkipSong():
     if is_cider_active():
-        requests.post(url + "/next")
+        response = requests.post(url + "/next")
+        if response.status_code == 200:
+            print("Skipped to the next track successfully.")
+        else:
+            print(f"Failed to skip track: {response.status_code} - {response.text}")
 
 def RewindSong():
     if is_cider_active():
-        requests.post(url + "/previous")
+        response = requests.post(url + "/previous")
+        if response.status_code == 200:
+            print("Skipped to the next track successfully.")
+        else:
+            print(f"Failed to skip track: {response.status_code} - {response.text}")
 
 def Pause_PlaySong():
     if is_cider_active():
-        requests.post(url + "/playpause")
-  
-
+        response = requests.post(url + "/playpause")
+        if response.status_code == 200:
+            print("Skipped to the next track successfully.")
+        else:
+            print(f"Failed to skip track: {response.status_code} - {response.text}")
 
 
 
