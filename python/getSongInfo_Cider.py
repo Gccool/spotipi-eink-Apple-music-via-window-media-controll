@@ -60,23 +60,6 @@ def isSongOn(info):
 
 
 
-def split_album_artist(album_artist):
-    # Split the string at ' - '
-    parts = album_artist.split(' — ')
-    if len(parts) == 2:
-        album, artist = parts
-        return album, artist
-    else:
-        raise ValueError("The input string must be in the format 'album - artist'")
-        
-def split_album_artist_check(album_artist):
-    # Split the string at ' - '
-    parts = album_artist.split(' — ')
-    if len(parts) == 2:
-        return True
-    else:
-        #raise ValueError("The input string must be in the format 'album - artist'")
-        return False
 
 def getSongInfo():
     if is_cider_active():
